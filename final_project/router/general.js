@@ -59,19 +59,19 @@ async function getBookByTitle(title) {
 }
 
 // Get the book list available in the shop
-public_users.get('/', function (req, res) {
+public_users.get('/', async function (req, res) {
   //Write your code here
   return res.send(JSON.stringify(books, null));
 });
 
 // Get book details based on ISBN
-public_users.get('/isbn/:isbn', function (req, res) {
+public_users.get('/isbn/:isbn', async function (req, res) {
   const isbn = req.params.isbn;
   res.send(books[isbn]);
 });
 
 // Get book details based on author
-public_users.get('/author/:author', function (req, res) {
+public_users.get('/author/:author', async function (req, res) {
   const myAuthor = req.params.author;
 
   let authorBooks = Object.fromEntries(Object.entries(books).filter(([isbn, book]) => book.author == myAuthor));
@@ -80,7 +80,7 @@ public_users.get('/author/:author', function (req, res) {
 });
 
 // Get all books based on title
-public_users.get('/title/:title', function (req, res) {
+public_users.get('/title/:title', async function (req, res) {
   const bookTitle = req.params.title;
 
   let booksByTitle = Object.fromEntries(Object.entries(books).filter(([isbn, book]) => book.title == bookTitle));
